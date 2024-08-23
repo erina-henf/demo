@@ -1,3 +1,7 @@
+info.onLifeZero(function () {
+    music.stopAllSounds()
+    game.gameOver(false)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     otherSprite.destroy()
     info.changeScoreBy(10)
@@ -158,23 +162,24 @@ scene.setBackgroundImage(img`
 let Speed = -100
 game.setGameOverEffect(false, effects.bubbles)
 game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
+music.play(music.stringPlayable("A F E F D G E F ", 240), music.PlaybackMode.LoopingInBackground)
 game.onUpdateInterval(5000, function () {
     bogey = sprites.create(img`
         ...........fffffff...ccfff..........
-        ..........fbbbbbbbffcbbbbf..........
-        ..........fbb111bbbbbffbf...........
-        ..........fb11111ffbbbbff...........
-        ..........f1cccc1ffbbbbbcff.........
-        ..........ffc1c1c1bbcbcbcccf........
-        ...........fcc3331bbbcbcbcccf..ccccc
-        ............c333c1bbbcbcbccccfcddbbc
-        ............c333c1bbbbbbbcccccddbcc.
-        ............c333c11bbbbbccccccbbcc..
-        ...........cc331c11bbbbccccccfbccf..
-        ...........cc13c11cbbbcccccbbcfccf..
-        ...........c111111cbbbfdddddc.fbbcf.
-        ............cc1111fbdbbfdddc...fbbf.
-        ..............cccfffbdbbfcc.....fbbf
+        ..........f2222222ffcbbbbf..........
+        ..........f2211122222ffbf...........
+        ..........f211111ff2222ff...........
+        ..........f1cccc1ff22222cff.........
+        ..........ffc1c1c122c2c2cccf........
+        ...........fcc3331222c2c2cccf..ccccc
+        ............c333c1222c2c2ccccfcddbbc
+        ............c333c12222222cccccddbcc.
+        ............c333c1122222ccccccbbcc..
+        ...........cc331c112222ccccccfbccf..
+        ...........cc13c11c222cccccbbcfccf..
+        ...........c111111c222fdddddc.fbbcf.
+        ............cc1111f2d22fdddc...fbbf.
+        ..............cccfffbd22fcc.....fbbf
         ....................fffff........fff
         `, SpriteKind.Enemy)
     bogey.setPosition(160, randint(0, 115))
