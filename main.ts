@@ -51,7 +51,7 @@ fish = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(fish, 100, 100)
 fish.setStayInScreen(true)
-scene.setBackgroundColor(2)
+scene.setBackgroundColor(5)
 game.onUpdateInterval(1000, function () {
     bogey = sprites.create(img`
         ....................ccfff...........
