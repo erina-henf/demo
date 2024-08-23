@@ -22,11 +22,6 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     otherSprite.destroy()
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
-    if (true) {
-    	
-    } else {
-    	
-    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 500)
@@ -56,6 +51,7 @@ fish = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(fish, 100, 100)
 fish.setStayInScreen(true)
+scene.setBackgroundColor(2)
 game.onUpdateInterval(1000, function () {
     bogey = sprites.create(img`
         ....................ccfff...........
