@@ -18,6 +18,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . . 
         `, fish, 200, 0)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.destroy()
+    info.changeLifeBy(1)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy(effects.disintegrate, 500)
     info.changeScoreBy(1)
@@ -28,6 +32,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     info.changeLifeBy(-1)
 })
 let bogey: Sprite = null
+let taco: Sprite = null
 let projectile: Sprite = null
 let fish: Sprite = null
 info.setLife(5)
@@ -173,6 +178,29 @@ scene.setBackgroundImage(img`
     6cccccccccccccc66666ccccccccccccccccccc6666cccc6644bccccccccccccc8666666666666f66666ffffffff666666666666666666ccccccccccccccccccccccccccccccccccccccccccccccccc8
     6cccccccccccccc66666ccccccccccccccccccc666ccccc6666ccccccccccccccf666666666666ff6666ffffffff6666666666666666666ccccccccccccccc6cccccccccccccccccccccccccccccccc8
     `)
+game.onUpdateInterval(5000, function () {
+    taco = sprites.create(img`
+        . . . . . . . e e e e . . . . . 
+        . . . . . e e 4 5 5 5 e e . . . 
+        . . . . e 4 5 6 2 2 7 6 6 e . . 
+        . . . e 5 6 6 7 2 2 6 4 4 4 e . 
+        . . e 5 2 2 7 6 6 4 5 5 5 5 4 . 
+        . e 5 6 2 2 8 8 5 5 5 5 5 4 5 4 
+        . e 5 6 7 7 8 5 4 5 4 5 5 5 5 4 
+        e 4 5 8 6 6 5 5 5 5 5 5 4 5 5 4 
+        e 5 c e 8 5 5 5 4 5 5 5 5 5 5 4 
+        e 5 c c e 5 4 5 5 5 4 5 5 5 e . 
+        e 5 c c 5 5 5 5 5 5 5 5 4 e . . 
+        e 5 e c 5 4 5 4 5 5 5 e e . . . 
+        e 5 e e 5 5 5 5 5 4 e . . . . . 
+        4 5 4 e 5 5 5 5 e e . . . . . . 
+        . 4 5 4 5 5 4 e . . . . . . . . 
+        . . 4 4 e e e . . . . . . . . . 
+        `, SpriteKind.Food)
+    taco.setPosition(randint(0, 160), 0)
+    taco.setVelocity(0, 100)
+    taco.setFlag(SpriteFlag.AutoDestroy, true)
+})
 game.onUpdateInterval(1000, function () {
     bogey = sprites.create(img`
         ....................ccfff...........
