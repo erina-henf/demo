@@ -2,15 +2,13 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     otherSprite.destroy()
     info.changeScoreBy(10)
     Speed += -30
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    otherSprite.destroy(effects.disintegrate, 500)
-    info.changeScoreBy(1)
+    music.play(music.melodyPlayable(music.jumpUp), music.PlaybackMode.UntilDone)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     otherSprite.destroy()
     scene.cameraShake(4, 500)
     info.changeLifeBy(-1)
+    music.play(music.melodyPlayable(music.zapped), music.PlaybackMode.UntilDone)
 })
 let taco: Sprite = null
 let bogey: Sprite = null
@@ -33,7 +31,7 @@ let fish = sprites.create(img`
     . . c d d d f f f f . . . . . . 
     . . . c c c . . . . . . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(fish, 100, 100)
+controller.moveSprite(fish, 150, 150)
 fish.setStayInScreen(true)
 scene.setBackgroundImage(img`
     8fffffffffffffffffffffffff88fffff88ffff8998889999999989988888989999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -158,6 +156,8 @@ scene.setBackgroundImage(img`
     6cccccccccccccc66666ccccccccccccccccccc666ccccc6666ccccccccccccccf666666666666ff6666ffffffff6666666666666666666ccccccccccccccc6cccccccccccccccccccccccccccccccc8
     `)
 let Speed = -100
+game.setGameOverEffect(false, effects.bubbles)
+game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
 game.onUpdateInterval(5000, function () {
     bogey = sprites.create(img`
         ....................ccfff...........
